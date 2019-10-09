@@ -1,11 +1,12 @@
-import React from 'react';
-
+import React, {useState} from 'react';
+import {connect} from 'react-redux';
 import Header from './components/Header';
 import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
+import {setCar, setAddFeatures, setAddPrice, removeFeature} from './actions';
 
-const App = () => {
+const App = props => {
   const state = {
     additionalPrice: 0,
     car: {
@@ -34,15 +35,28 @@ const App = () => {
   return (
     <div className="boxes">
       <div className="box">
-        <Header car={state.car} />
-        <AddedFeatures car={state.car} />
+        <Header car={props.car} />
+        <AddedFeatures car={props.car} />
       </div>
       <div className="box">
-        <AdditionalFeatures store={state.store} />
-        <Total car={state.car} additionalPrice={state.additionalPrice} />
+        <AdditionalFeatures store={props.store} />
+        <Total car={props.car} additionalPrice={props.additionalPrice} />
       </div>
     </div>
   );
 };
 
-export default App;
+const mapStateToProps = state => {
+  console.log('App.js, State:', state);
+  return {
+    car: state.car.car,
+    store: state.car.store,
+    additionalPrice: state.car.additionalPrice,
+    additionalFeatures: state.car.additionalFeatures,
+  }
+};
+
+export default connect(
+  mapStateToProps,
+  {setCar, setAddFeatures, setAddPrice, removeFeature}
+)(App);
