@@ -2,7 +2,8 @@ html, body, #root {
   height: 100%;
 }
 body {
-  background: #333;
+  background-image: url('https://rvhealth.com/wp-content/uploads/2017/06/open-road-bg.jpg');
+  background-size: cover;
   margin: 0;
   display: grid;
   padding: 3em;
@@ -17,10 +18,13 @@ body {
 .box {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
   h1 {
     font-size: 20px;
     margin: 0 0 1rem 0;
+  }
+  img{
+    min-width: 310px;
+    margin: 0 auto;
   }
   .content {
     padding-top: 1em;
@@ -35,7 +39,7 @@ body {
   }
 }
 .button {
-  background: hotpink;
+  background: #fcb401;
   border: 1px solid transparent;
   color: white;
   margin-right: 1em;
@@ -43,7 +47,7 @@ body {
   transition: all .25s ease-in;
   &:hover {
     background: white;
-    border: 1px solid hotpink;
+    border: 1px solid #fcb401;
     color: #333;
   }
 }
