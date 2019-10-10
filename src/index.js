@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import {Reducer} from './reducers/reducer';
+import {rooterReducer} from './reducers/reducer';
 import App from './App';
 
 import 'bulma/css/bulma.css';
 import './styles.scss';
 
-const store = createStore(Reducer);
+const store = createStore(rooterReducer);
 console.log(store);
 
 

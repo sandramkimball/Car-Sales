@@ -3,13 +3,13 @@
 // ACTIONS: objects that describe to reducer what event occured and how to update the state.
 
 export const SET_CAR = 'SET_CAR';
-export const setCar = () => ({type: SET_CAR, payload: car});
+export const setCar = (car) => ({type: SET_CAR, payload: car});
 
 export const REMOVE_FEATURE = 'REMOVE_FEATURE';
-export const removeFeature = () => ({type: REMOVE_FEATURE, payload: features});
+export const removeFeature = features => ({type: REMOVE_FEATURE, payload: features});
 
-export const SET_ADDITIONAL_FEATURES = 'SET_ADDITIONAL_FEATURES';
-export const setAddFeatures = () => ({type: SET_ADDITIONAL_FEATURES, payload: AdditionalFeatures});
+export const ADD_FEATURE = 'ADD_FEATURE';
+export const addFeature = additionalFeatures => ({type: ADD_FEATURE, payload: additionalFeatures});
 
 export const SET_ADDITIONAL_PRICE = 'SET_ADDITIONAL_PRICE';
-export const setAddPrice = () => ({type: SET_ADDITIONAL_PRICE, payload: additionalPrice});
+export const setAdditionalPrice = additionalPrice => ({type: SET_ADDITIONAL_PRICE, payload: additionalPrice});

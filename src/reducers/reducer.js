@@ -1,62 +1,64 @@
-import {SET_CAR, SET_ADDITIONAL_FEATURES, SET_ADDITIONAL_PRICE, REMOVE_FEATURE} from '../actions/actions';
+import {SET_CAR, ADD_FEATURE, SET_ADDITIONAL_PRICE, REMOVE_FEATURE} from '../Actions';
 
 export const initialState = {
     additionalPrice: 0,
     car: {
-      price: 0,
-      name: '',
-      image: '',
-      features: []},
-
-    additionalFeatures: [
-      { id: 0,
-        name: '', 
-        price: 0 }],
+        price: 26395,
+        name: '2019 Ford Mustang',
+        image:
+          'https://cdn.motor1.com/images/mgl/0AN2V/s1/2019-ford-mustang-bullitt.jpg',
+        features: []
+      },
+      store: [
+        { id: 1, name: 'V-6 engine', price: 1500 },
+        { id: 2, name: 'Racing detail package', price: 1500 },
+        { id: 3, name: 'Premium sound system', price: 500 },
+        { id: 4, name: 'Rear spoiler', price: 250 }
+    ]
   };
 
-export const Reducer = (state = initialState, action) => {
-    console.log(action, state);
-    switch (action.type){
+export const rooterReducer = (state = initialState, {type, payload}) => {
+    console.log(type, state);
+    switch (type){
 
         case SET_CAR:
             return{
                 car:{
                     ...state,
-                    price: action.payload,
-                    name: action.payload,
-                    image: action.payload,
-                    features: [...state.features, {features: action.payload}]
+                    price: state.price,
+                    name: state.name,
+                    image: state.image,
+                    features: [
+                        ...state.car.features]
                 }
             }
 
-        case SET_ADDITIONAL_FEATURES:
+        case ADD_FEATURE:
             return{
-                additionalFeatures:{
                     ...state,
-                    id: Date.now(),
-                    name: action.payload,
-                    price: action.payload,
+                    car: {
+                        ...state.car, features: [
+                            ...state.car.features, payload
+                        ]
+                    }
                 }
-            }
 
         case SET_ADDITIONAL_PRICE:
             return{
                 additionalPrice:{
                     ...state,
-                    additionalPrice: action.payload,
+                    additionalPrice: state.additionalPrice,
                 }
             }
 
         case REMOVE_FEATURE:
-                return{...state, features: state.features.filter(features=> !features.select)};
-
-        
-        // case BUY_ITEM:
-        //     return{
-        //         ...state
-        //     };
+                return{...state, car: {
+                    ...state.car, 
+                    features: state.car.features.filter(features=> features.id !== payload.id)
+                }
+            };
 
         default: 
-        return state;
+            return state;
     }
 }
