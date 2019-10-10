@@ -1,4 +1,4 @@
-import {SET_CAR, ADD_FEATURE, SET_ADDITIONAL_PRICE, REMOVE_FEATURE} from '../Actions';
+import {ADD_FEATURE, REMOVE_FEATURE} from '../Actions';
 
 export const initialState = {
     additionalPrice: 0,
@@ -17,44 +17,40 @@ export const initialState = {
     ]
   };
 
-export const rooterReducer = (state = initialState, {type, payload}) => {
-    console.log(type, state);
-    switch (type){
+export const rooterReducer = (state = initialState, action) => {
+    console.log( state);
+    switch (action.type){
 
-        case SET_CAR:
-            return{
-                car:{
-                    ...state,
-                    price: state.price,
-                    name: state.name,
-                    image: state.image,
-                    features: [
-                        ...state.car.features]
-                }
-            }
+        // case SET_CAR:
+        //     return{
+        //         car:{
+        //             ...state,
+        //             price: state.price,
+        //             name: state.name,
+        //             image: state.image,
+        //             features: [
+        //                 ...state.car.features]
+        //         }
+        //     }
 
         case ADD_FEATURE:
             return{
                     ...state,
+                    additionalPrice: state.additionalPrice + action.payload.price,
                     car: {
                         ...state.car, features: [
-                            ...state.car.features, payload
+                            ...state.car.features, action.payload
                         ]
                     }
                 }
 
-        case SET_ADDITIONAL_PRICE:
-            return{
-                additionalPrice:{
-                    ...state,
-                    additionalPrice: state.additionalPrice,
-                }
-            }
-
         case REMOVE_FEATURE:
-                return{...state, car: {
+                return{
+                    ...state, 
+                    additionalPrice: state.additionalPrice - action.payload.price,
+                    car: {
                     ...state.car, 
-                    features: state.car.features.filter(features=> features.id !== payload.id)
+                    features: state.car.features.filter(features=> features.id !== action.payload.id)
                 }
             };
 
